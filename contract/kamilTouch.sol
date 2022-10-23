@@ -27,7 +27,12 @@ contract kamiltouch {
         uint price;
         uint sold;
     }
-
+    
+// Function to create a painting providing the
+// name
+// image url
+// description
+// price
     function writePainting(
 		string memory _name,
 		string memory _image,
@@ -35,24 +40,28 @@ contract kamiltouch {
 		uint _price
     ) public {
         uint _sold = 0;
+        uint _likes = 0;
 		paintings[paintingsLength] = Painting(
 			payable(msg.sender),
 			_name,
 			_image,
 			_description,
 			_price,
-			_sold
+			_sold,
+            _likes
 		);
         paintingsLength++;
     }
 
+// Function to read an uploaded painting using the index of the painting
     function readPainting(uint _index) public view returns (
         address payable,
 		string memory, 
 		string memory, 
 		string memory,
 		uint, 
-		uint
+		uint,
+        uint
     ) {
         return (
             paintings[_index].owner, 
@@ -60,10 +69,13 @@ contract kamiltouch {
 			paintings[_index].image, 
 			paintings[_index].description,
 			paintings[_index].price,
-			paintings[_index].sold
+			paintings[_index].sold,
+            		paintings[_index].likes
         );
     }
-
+    
+// Function to buy an uploaded painting using the painting's index
+// it sends the money to be paid from the buyer to the owner of the painting
     function buyPainting(uint _index) public payable  {
 		require(
 		  IERC20Token(cUsdTokenAddress).transferFrom(
@@ -75,9 +87,15 @@ contract kamiltouch {
 		);
 		paintings[_index].sold++;
 	}
-
-
+    
+   // Function to like a painting using the painting's index
+    function likePainting(uint _index) public {
+        paintings[_index].likes ++;
+    }
+    
+    // Function tp get the total length of all the uploaded painting
     function getPaintingsLength() public view returns (uint) {
         return (paintingsLength);
     }
+
 }
