@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kamilTouch artistry</title>
+</head>
+<body>
+    <style>
+        /* GENERAL_STYLING */
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+  }
+  
+  body {
+    background-color: #fff;
+    position: relative;
+  }
+  /* NAVIGATION_STYLING */
+  
+  .container {
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(42, 66, 49);
+    z-index: 1;
+  }
+  
+  .navbar {
+    display: flex;
+    min-width: 100px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 80px;
+    margin-bottom: 20px;
+    align-items: center;
+    color: rgb(218, 231, 222);
+  }
+  
+  .navbar-brand {
+    margin-left: 15px;
+    font-size: 1.8rem;
+    padding:10px auto;
+  }
+  
+  .navbar-balance {
+    margin-right: 15px;
+    font-size: 1.2rem;
+  }
+  /*NOTIFICATION_STYLING */
+  
+  .notification {
+    position: absolute;
+    box-sizing: border-box;
+    top: 100px;
+    left: 10px; 
+    background-color: rgb(145, 190, 156);
+    color: #fff;
+    border-radius: 8px;
+    padding: 5px 15px;
+  } 
+  #notification{
+    font-size: 1.4rem;
+    font-weight: normal;
+    font-style: oblique;
+    margin-left: 10px;
+  }
+  
+  .add-paint-div {
+    margin: 60px 20px;
+  }
+  .add-painting {
+    border: medium solid rgb(42, 66, 49);
+    color: rgb(42, 66, 49);
+    background-color: rgb(145, 190, 156);
+    border-radius: 50px;
+    font-size: medium;
+  }
+  
+  /* PAINTING_STYLING */   
+  
+  .painting-container {
+    display: flex;
+    padding: 57px 5%;
+    margin: 0px 5px;
+    flex-wrap: wrap;
+    gap: 114px 3px;
+  }
+      
+  .painting-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    border: medium solid rgb(42, 66, 49);
+    height: 40px;
+    padding: 0 10px;
+    margin-left: 20px;
+    border-radius: 70px;
+  }
+  
+  .painting-search input {
+    color: rgb(42, 66, 49);
+    width: 80%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1rem;
+  }
+  
+  .painting-search img {
+    width: 20px;
+  }
+
+  .marketplace {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 102px;
+      }
+    
+      .newPainting-div {
+        position: relative;
+        width: 290px;
+        height: 430px;
+        display: flex;
+        padding: 0;
+        box-sizing: border-box;
+        flex-direction: column;
+        gap: 18px;
+        justify-content: space-between;
+        box-shadow: 0px 0px 5px rgb(42, 66, 49);
+        border-radius: 16px;
+        border: 1px solid rgb(66, 100, 79);
+        overflow: hidden;
+      }
+      .newPainting-div .painting-image {
+        height: 235px;
+        width: 100%;
+        overflow: hidden;
+      }
+      .painting-image img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .newPainting-div .sold {
+        position: absolute;
+        top: 20%;
+        right: 0;
+        background-color: rgb(42, 66, 49);
+        color: white;
+        border: 2px solid rgb(145, 190, 156);
+        padding: 4px 6px;
+        border-radius: 50px;
+        border-right-style: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .newPainting-div .painting-name {
+        display: flex;
+        font-size: 18px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        color: rgb(42, 66, 49);
+        margin: 30px 10px 5px 10px;
+        text-transform: capitalize;
+      }
+      .painting-name .painting-likes {
+        font-size: 14px;
+        width: 80px;
+        display: flex;
+        position: relative;
+        align-items: center;
+        gap: 10;
+        font-weight: 300;
+      }
+      .painting-likes img {
+        width: 25px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .painting-likes img:hover {
+        width: 27px;
+      }
+      .painting-likes img:active {
+        width: 24px;
+      }
+
+      .painting-likes .num-of-likes {
+        margin-left: 25px;
+      }
+
+      .newPainting-div .painting-description{
+        text-transform: capitalize;
+        margin: 10px;
+      }
+
+      .newPainting-div .buy-div{
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10px;
+        padding-top: 10px;
+        margin-top: 20px;
+        width: 200px;
+      }
+
+      .newPainting-div .buy-painting {
+        border: 2px solid rgb(42, 66, 49);
+        border-radius: 5px;
+        margin-bottom: 5px;
+        padding: 4px 4px;
+        color: rgb(42, 66, 49);
+        cursor: pointer;
+      }
+
+      .newPainting-div .painting-identicon {
+        border: thin solid rgb(42, 66, 49);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        position: absolute;
+        top: calc(50% + 20px);
+        left: 10px;
+        transform: translateY(-50%);
+      }
+
+      
+
+  /* FORM_STYLING */
+  
+  .painting-form {
+    display: flex;
+    position: absolute;
+    box-sizing: border-box;
+    justify-content: center;
+    z-index: 10;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 14, 11, 0.7);
+  }
+  
+  form {
+    border: 9px solid rgb(42, 66, 49);
+    background-color: #fff;
+    box-sizing: border-box;
+    width: 400px;
+    height: 400px;
+    margin-top: 30px;
+    border-radius: 16px;
+    padding: 48px 22px;
+  }
+  
+  form div {
+    margin: 18px 0px;
+  }
+  form input, form select {
+    width: 100%;
+    outline: none;
+    padding-left: 16px;
+    height: 43px;
+    box-sizing: border-box;
+    border: thin solid #b1b0b0;
+    font-size: 1rem;
+    font-family: "DM Sans";
+    border-radius: 8px;
+  }
+  form select {
+    color: rgb(42, 66, 49);
+  }
+  
+  .icon-img {
+    padding: 0px;
+    font-size: 5rem;
+    margin: 0px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .painting-img label {
+    margin: 0px;
+    font-family: "DM Sans";
+    color: #fff;
+  }
+  
+  .form-btn {
+    display: flex;
+    justify-content: space-evenly;
+    
+  }
+  
+  .form-btn button {
+    min-width: 100px;
+    border: medium solid rgb(42, 66, 49);
+    color: #fff;
+    background-color: rgb(145, 190, 156);
+    height: 30px;
+    margin-top: 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .hide {
+    display: none;
+  }
+    </style>
+    <div class="container">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <h4>KamilTouch Artistry</h4>
+            </div>
+            <div class="navbar-balance"><span id="balance">0.000</span> cUSD</div>
+        </nav>
+    </div>
+
+    <div class="alert" >
+        <span id="notification">⌛ Page Loading ...</span>
+    </div>
+
+    <div class="painting-search">
+      <input type="search" placeholder="Search" />
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/54/54481.png"
+        alt="Seacrh icon" />
+    </div>
+
+    <div class="add-paint-div">
+        <button class="add-painting">Add painting</button>
+    </div>
+
+    <div class="painting-container">
+        <div>
+            <main id="marketplace" class="marketplace"></main>
+        </div>
+    </div>
+    
+    <div class="painting-form hide" id="painting-form">
+        <form action="" >
+            <div class="painting-img">
+                <input type="text" id="newImgUrl" placeholder="image url" />
+            </div>
+    
+            <div class="painting_name">
+                <input type="text" placeholder="painting name" id="newPaintingName" required />
+            </div>
+    
+            <div class="painting-description">
+                <input type="text" placeholder="painting description" id="newPaintingDescription" required />
+            </div>
+    
+            <div class="painting-price">
+                <input type="number" placeholder="price of painting" id="newPrice" required />
+            </div>
+
+            <div class="form-btn">
+                <button class="add-product" id="newPaintingBtn">Add painting</button>
+                <button class="cancel">Cancel</button>
+            </div>    
+        </form>
+    </div>
+    <script src="https://unpkg.com/ethereum-blockies@0.1.1/blockies.min.js"></script>
+    <script src="../src/main.js"></script>
+</body>
+</html>
