@@ -1,17 +1,9 @@
 # Kamil Touch
 
-Hello, this is my Celo 101 submission. It's an advertising dapp that allows people to post advertisements on the platform and pay a base fee for the advertisement. Other users who come to the platform can view the adverts and earn the process. I intend to build something similar to how Brave browser awards brave tokens to users who view advertisements. I will be glad to hear what you guys have to say about it.
-
-Some things to note while testing the dapp
-
-Advert creation cost a minimum of 2 CELO tokens. You can fund the advert with more tokens on the advert page.
-Every view on an advert deducts 1 CELO from the advert balance. Once an advert is out of funds, it is automatically taken out of the dashboard.
-A user can only view and advert once, any other attempt results to an error.
-For every advert a user view, they earn .5 CELO and the remaining .5 CELO goes back to the platform.
-Only the admin can view and withdraw funds accumulated in the platform.
+Good Day, my name is shola and this is my Celo 101 project. It's a painting dapp that enable people to sell their paintings and also buy from the platform. the painting dapp platform allows people to like paintings they love even though they don't have money to buy them. i intend to add more features on this project when i will be doing my celo 201 project, making this project the foundation for the celo 201. waiting for comments from you guys, so as to improve on my next projoct....
 
 
-Demo: 
+Demo: https://jsholly2.github.io/kamiltouch/
 
 # Install
 
