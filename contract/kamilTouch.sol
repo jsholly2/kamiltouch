@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: MIT  
+import "@openzeppelin/contracts/utils/Counters.sol";
+
 
 pragma solidity >=0.7.0 <0.9.0;
 
@@ -15,10 +17,10 @@ interface IERC20Token {
 }
 
 contract kamiltouch {
-    mapping (uint => Painting) internal paintings;
-    uint internal paintingsLength = 0;
-    address internal cUsdTokenAddress = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
-    
+    address internal constant cUsdTokenAddress = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
+    using Counters for Counters.Counter;
+    Counters.Counter paintingsLength;
+
     struct Painting {
         address payable owner;
         string name;
@@ -26,7 +28,13 @@ contract kamiltouch {
         string description;
         uint price;
         uint sold;
+        uint likes;
     }
+
+
+    mapping (uint => Painting) internal paintings;
+    mapping (uint => mapping(address => bool)) hasLiked;
+    
     
 // Function to create a painting providing the
 // name
@@ -39,18 +47,16 @@ contract kamiltouch {
 		string memory _description, 
 		uint _price
     ) public {
-        uint _sold = 0;
-        uint _likes = 0;
-		paintings[paintingsLength] = Painting(
+		paintings[paintingsLength.current()] = Painting(
 			payable(msg.sender),
 			_name,
 			_image,
 			_description,
 			_price,
-			_sold,
-            _likes
+			0,
+            0
 		);
-        paintingsLength++;
+        paintingsLength.increment();
     }
 
 // Function to read an uploaded painting using the index of the painting
@@ -70,13 +76,14 @@ contract kamiltouch {
 			paintings[_index].description,
 			paintings[_index].price,
 			paintings[_index].sold,
-            		paintings[_index].likes
+            paintings[_index].likes
         );
     }
     
 // Function to buy an uploaded painting using the painting's index
 // it sends the money to be paid from the buyer to the owner of the painting
     function buyPainting(uint _index) public payable  {
+        require(msg.sender != paintings[_index].owner, "owner can't buy");
 		require(
 		  IERC20Token(cUsdTokenAddress).transferFrom(
 			msg.sender,
@@ -90,12 +97,14 @@ contract kamiltouch {
     
    // Function to like a painting using the painting's index
     function likePainting(uint _index) public {
-        paintings[_index].likes ++;
+        require(!hasLiked[_index][msg.sender], "already liked");
+        paintings[_index].likes++;
+        hasLiked[_index][msg.sender] = true;
     }
     
     // Function tp get the total length of all the uploaded painting
     function getPaintingsLength() public view returns (uint) {
-        return (paintingsLength);
+        return (paintingsLength.current());
     }
 
 }
