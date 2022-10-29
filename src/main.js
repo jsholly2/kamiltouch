@@ -25,7 +25,7 @@ const connectCeloWallet = async function () {
 
         const accounts = await kit.web3.eth.getAccounts();
         kit.defaultAccount = accounts[0]
-        console.log(kit.defaultAccount)
+        // console.log(kit.defaultAccount)
 
         contract = new kit.web3.eth.Contract(kamilTouchAbi, kamilTouchContractAddress);
       } catch (error) {
@@ -63,7 +63,7 @@ const getBalance = async function () {
     const totalBalance = await kit.getTotalBalance(kit.defaultAccount);
     cUSDBalance = totalBalance.cUSD.shiftedBy(-ERC20_DECIMALS).toFixed(2);
     document.querySelector("#balance").textContent = cUSDBalance;
-    console.log(cUSDBalance)
+    // console.log(cUSDBalance)
   }
 
   const getPaintings = async function() {
@@ -87,7 +87,7 @@ const getBalance = async function () {
       }
       paintings = await Promise.all(_paintings)
       
-      console.log(paintings)
+      // console.log(paintings)
       renderPaintings();
     }
 
@@ -132,7 +132,7 @@ document.querySelector("#marketplace").addEventListener("click", async function(
     if(paintings[index].owner != kit.defaultAccount) {
       try {
         notification("Like in progress")
-        let res = await contract.methods.likePainting(index).send({ from: kit.defaultAccount });
+         await contract.methods.likePainting(index).send({ from: kit.defaultAccount });
         notification("Like successful")
         await getPaintings();
         notificationOff();
