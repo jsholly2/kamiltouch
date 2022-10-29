@@ -216,7 +216,7 @@ window.addEventListener("load", async () => {
 document.querySelector("#marketplace").addEventListener("click", async (e) => {
     if(e.target.className.includes("buy-painting")) {
       const index = e.target.id
-      if(paintings[index].owner != kit.defaultAccount && cUSDBalance > paintings[index].price) {
+      if(paintings[index].owner != kit.defaultAccount && cUSDBalance >= paintings[index].price) {
         notification("⌛ Waiting for payment approval...")
         try {
           await approve(paintings[index].price)
