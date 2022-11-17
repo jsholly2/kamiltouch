@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT  
+pragma solidity >=0.7.0 <0.9.0;
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 
-pragma solidity >=0.7.0 <0.9.0;
 
 interface IERC20Token {
   function transfer(address, uint256) external returns (bool);
@@ -30,7 +30,6 @@ contract kamiltouch {
         uint sold;
         uint likes;
     }
-
 
     mapping (uint => Painting) internal paintings;
     mapping (uint => mapping(address => bool)) hasLiked;
@@ -98,8 +97,10 @@ contract kamiltouch {
    // Function to like a painting using the painting's index
     function likePainting(uint _index) public {
         require(!hasLiked[_index][msg.sender], "already liked");
-        paintings[_index].likes++;
-        hasLiked[_index][msg.sender] = true;
+        if(!hasLiked[_index][msg.sender]) {
+            paintings[_index].likes++;
+            hasLiked[_index][msg.sender] = true;
+        }
     }
     
     // Function tp get the total length of all the uploaded painting

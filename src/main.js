@@ -5,7 +5,7 @@ import kamilTouchAbi from "../contract/kamilTouch.abi.json"
 import erc20Abi from "../contract/erc20.abi.json"
 
 const ERC20_DECIMALS = 18
-const kamilTouchContractAddress = "0xE73783af8d846fe99c15aAcBE051467fF97EB518";
+const kamilTouchContractAddress = "0xe10731551bBdD08E0FEE87340f03f60e86F84cbf";
 const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1";
 
 let kit;
@@ -139,6 +139,7 @@ document.querySelector("#marketplace").addEventListener("click", async function(
       }
       catch(e) {
         console.log(e)
+        notificationOff();
       }
     }
     else {
