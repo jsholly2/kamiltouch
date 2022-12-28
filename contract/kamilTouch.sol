@@ -34,6 +34,11 @@ contract kamiltouch {
     mapping (uint => Painting) internal paintings;
     mapping (uint => mapping(address => bool)) hasLiked;
     
+    // To prevent unauthorized persons
+    modifier isOwner(address _address) {
+        require(msg.sender == _address, "NOT_THE_OWNER");
+        _;
+    }
     
 // Function to create a painting providing the
 // name
@@ -93,6 +98,19 @@ contract kamiltouch {
 		);
 		paintings[_index].sold++;
 	}
+
+    function editPainting(
+        uint256 _index,
+        string memory _name,
+        string memory _description,
+        string memory _image, 
+        uint256 _price
+    ) public isOwner(paintings[_index].owner) {
+        paintings[_index].name = _name;
+        paintings[_index].description = _description;
+        paintings[_index].image = _image;
+        paintings[_index].price = _price;
+    }
     
    // Function to like a painting using the painting's index
     function likePainting(uint _index) public {
@@ -101,6 +119,10 @@ contract kamiltouch {
             paintings[_index].likes++;
             hasLiked[_index][msg.sender] = true;
         }
+    }
+
+    function deletePainting(uint256 _index) public isOwner(paintings[_index].owner) {
+        delete paintings[_index];
     }
     
     // Function tp get the total length of all the uploaded painting
